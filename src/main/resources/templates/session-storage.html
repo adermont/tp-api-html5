@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Storage Example</title>
+</head>
+<body>
+<h1>Web Storage Example</h1>
+<div>
+  <p>Counter Value: <span id="counter">0</span></p>
+  <button id="incrementBtn">Increment</button>
+  <button id="clearBtn">Clear Storage</button>
+</div>
+
+<script>
+  // Retrieve counter value from storage if it exists
+  let counterValue = sessionStorage.getItem('counterValue');
+  if (counterValue) {
+    document.getElementById('counter').innerText = counterValue;
+  }
+
+  // Increment counter value on button click
+  document.getElementById('incrementBtn').addEventListener('click', () => {
+    let counterElement = document.getElementById('counter');
+    let currentValue = parseInt(counterElement.innerText);
+    let newValue = currentValue + 1;
+    counterElement.innerText = newValue;
+    sessionStorage.setItem('counterValue', newValue);
+  });
+
+  // Clear storage on button click
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    sessionStorage.removeItem('counterValue');
+    document.getElementById('counter').innerText = '0';
+  });
+</script>
+</body>
+</html>

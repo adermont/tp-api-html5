@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Share Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            display: block;
+            width: 500px;
+            margin: 20px auto;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 5px solid white;
+            background-color: white;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .card img {
+            display: block;
+            width: auto;
+            height: auto;
+        }
+
+        .card .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .card h2 {
+            flex-wrap: nowrap;
+            margin-top: 0;
+        }
+
+        .card p {
+            margin-bottom: 10px;
+        }
+
+        .card .share-btn {
+            display: inline-block;
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="listings"></div>
+
+<script>
+    const listings = [
+        {
+            image: "https://picsum.photos/id/188/150.webp",
+            title: "Appartement de standing à Paris",
+            description: "Magnifique appartement de standing de 80m² dans le centre de Paris.",
+            url: "https://www.example.com/1"
+        },
+        {
+            image: "https://picsum.photos/id/193/150.webp",
+            title: "Maison familiale à Marseille",
+            description: "Spacieuse maison de 150m² avec jardin dans un quartier calme de Marseille.",
+            url: "https://www.example.com/2"
+        },
+        {
+            image: "https://picsum.photos/id/290/150.webp",
+            title: "Studio cosy à Lyon",
+            description: "Charmant studio de 30m² en plein coeur de Lyon.",
+            url: "https://www.example.com/3"
+        }
+    ];
+
+    function createListing(listing) {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        const image = document.createElement("img");
+        image.src = listing.image;
+        card.appendChild(image);
+
+        const content = document.createElement("div");
+        content.classList.add("content");
+
+        const title = document.createElement("h2");
+        title.textContent = listing.title;
+        content.appendChild(title);
+
+        const description = document.createElement("p");
+        description.textContent = listing.description;
+        content.appendChild(description);
+
+        const shareBtn = document.createElement("div");
+        shareBtn.classList.add("share-btn");
+        shareBtn.textContent = "Partager";
+
+        shareBtn.addEventListener("click", async () => {
+            await navigator.share({
+                title: listing.title,
+                text: listing.description,
+                url: listing.url
+            });
+        });
+        content.appendChild(shareBtn);
+
+        card.appendChild(content);
+
+        return card;
+    }
+
+    const listingsEl = document.getElementById("listings");
+    listings.forEach(listing => {
+        listingsEl.appendChild(createListing(listing));
+    });
+</script>
+</body>
+</html>

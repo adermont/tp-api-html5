@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Web API Geolocation Example</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+  <style>
+    html, body, #mapid {
+      height: 100%;
+      margin: 2px;
+      font-family: sans-serif;
+    }
+    #get-location-btn, #position {
+      margin: 2px;
+    }
+  </style>
+</head>
+<body>
+<button id="get-location-btn">Obtenir ma position</button><span id="position"></span>
+<div id="mapid"></div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+  // Le repère à placer sur la map à l'endroit de notre géolocalisation
+  let marker;
+
+  // Bouton de géolocalisation (obligatoire sinon ça veut dire qu'on essaye
+  // de contourner la gestion des autorisations de l'utilisateur).
+  let button = document.getElementById('get-location-btn');
+
+  // La map Leaflet
+  let mymap = L.map('mapid').setView([48.858093, 2.294694], 13);
+
+  // Un popup qui s'affichera au-dessus du marqueur
+  let popup = L.popup().setContent("D'après votre navigateur,<br> vous êtes ici");
+
+  // Ajout d'un layer sur la map pour afficher des tuiles avec les routes
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    tileSize: 512,
+    zoomOffset: -1,
+    maxZoom: 18
+  }).addTo(mymap);
+
+  // Ajoute un listener sur le bouton pour déclencher la géolocalisation via un clic
+  button.addEventListener('click', function() {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(onLocationFound, onLocationError);
+    } else {
+      alert("La géolocalisation n'est pas supportée par votre navigateur");
+    }
+  });
+
+  // Fonction de géolocalisation réussie
+  function onLocationFound(position) {
+
+    // On crée un tableau contenant latitude et longitude
+    const coords = [position.coords.latitude, position.coords.longitude];
+
+    // Si une marque a déjà été placée sur la map, on la supprime
+    if(marker) {
+      mymap.removeLayer(marker);
+    }
+    // On ajoute une marque à l'endroit de notre géolocalisation
+    marker = L.marker(coords).addTo(mymap);
+
+    marker.bindPopup(popup);
+    marker.addEventListener('click', (event) => {
+      popup.openOn(mymap);
+    });
+
+    // On déplace la map à l'endroit qu'on vient de marquer
+    mymap.setView(coords, 13);
+
+    // On met à jour le champ "position"
+    document.getElementById('position').textContent = `Lat: ${coords[0]}° / Lon: ${coords[1]}°`;
+  }
+
+  // Fonction de gestion d'erreur de géolocalisation
+  function onLocationError(e) {
+    alert(e.message);
+  }
+
+</script>
+</body>
+</html>

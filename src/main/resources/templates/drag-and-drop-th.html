@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Drag and Drop Example</title>
+    <style>
+        #dragzone {
+            border: 2px dashed #ccc;
+            padding: 10px;
+            width: 300px;
+            height: 200px;
+        }
+        #dropzone {
+            border: 2px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            height: 200px;
+        }
+        .item {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            cursor: move;
+            margin: 5px;
+            padding: 10px;
+            text-align: center;
+            width: 80px;
+        }
+        .item:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+<h1>Drag and Drop Example</h1>
+<p>Drag items from the "Drag" zone to the "Drop" zone to move them around.</p>
+<div id="dragzone">
+
+    <div id="item1" class="item" draggable="true">Item 1</div>
+    <div id="item2" class="item" draggable="true">Item 2</div>
+    <div id="item3" class="item" draggable="true">Item 3</div>
+</div>
+<div id="dropzone"></div>
+<script>
+    const dropzone = document.querySelector('#dropzone');
+
+    const items = document.querySelectorAll('.item');
+    items.forEach((item) => {
+        item.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('text/plain', event.target.id);
+            event.currentTarget.style.backgroundColor = '#f1f1f1';
+        });
+        item.addEventListener('dragend', (event) => {
+            event.currentTarget.style.backgroundColor = '#f9f9f9';
+        });
+    });
+
+    dropzone.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'move';
+    });
+
+    dropzone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        const data = event.dataTransfer.getData('text/plain');
+        const item = document.getElementById(data);
+        item.parentNode.removeChild(item);
+        dropzone.appendChild(item);
+    });
+</script>
+</body>
+</html>
