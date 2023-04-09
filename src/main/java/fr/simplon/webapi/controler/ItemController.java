@@ -1,7 +1,7 @@
-package fr.simplon.springofsimplon.controler;
+package fr.simplon.webapi.controler;
 
-import fr.simplon.springofsimplon.dao.ItemDao;
-import fr.simplon.springofsimplon.model.Item;
+import fr.simplon.webapi.dao.ItemDao;
+import fr.simplon.webapi.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;

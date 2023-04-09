@@ -1,10 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>TPs API HTML5</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-Welcome to the Spring of Simplon !
+<h1>Correction des TPs API HTML 5</h1>
+<div class="exercice">
+    <h2>Exercice 1 : fonction setTimeout()</h2>
+    <p>Cette fonction sert à programmer l'exécution d'une fonction dans le futur. Lisez la documentation sur
+        <a href="https://developer.mozilla.org/fr/docs/Web/API/setTimeout">MDN</a>.
+    </p>
+    <p>
+        Soit le code suivant :
+    <pre>
+        // On affiche 1 message important de manière asynchrone
+        setTimeout(() => {
+            console.log("MESSAGE IMPORTANT");
+        }, 0); // spécifier un délai de 0s équivaut à demander l'exécution immédiatement
+
+        // Ensuite on affiche 1000 messages
+        for (let i = 0; i < 1000; i++) {
+            console.log(`Message ${i}`);
+        }
+    </pre>
+    </p>
+    <p>Verra-t-on "MESSAGE IMPORTANT" avant ou après les 1000 ⇒ messages "Message ${i}" ? <br>Essayez de
+        répondre et expliquez votre réponse, <strong>SANS EXÉCUTER CE CODE</strong>.</p>
+</div>
+<div class="exercice">
+    <h2>Exercice 2 : un peu de lecture</h2>
+    <p>Si vous avez besoin d'approfondir avant d'aller plus loin, lisez cet article (en anglais) qui reprend les notions
+        vues ici :</p>
+    <a href="https://www.digitalocean.com/community/tutorials/understanding-the-event-loop-callbacks-promises-and-async-await-in-javascript">
+        Understanding the event loop callbacks promises and async/await in javascript</a>
+    <p>Ces notions doivent être comprises car vous les utiliserez au travers de la fonction <code>fetch()</code> que
+        nous allons voir après. Si vous avez bien compris, passez à la suite des exercices.</p>
+</div>
+<div class="exercice">
+    <h2>Exercice 3 : Web API "Fetch"</h2>
+    <p>La fonction <a href="https://developer.mozilla.org/fr/docs/Web/API/Fetch_API"><code>fetch()</code></a> est la manière la plus simple, efficace, lisible et fiable de faire une requête
+        vers un serveur en mode asynchrone pour ne pas bloquer l'exécution de votre page en attendant la réponse du
+        serveur.</p>
+    <p>Mettez en oeuvre la page HTML qui vous est présentée dans ce tutoriel :</p>
+    <a href="https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data-fr">
+        How to use the javascript fetch api to get data
+    </a>
+    <p class="correction">
+        <a href="/authors">Correction</a>
+    </p>
+</div>
+<div class="exercice">
+    <h2>Exercice 4 : Web APIs</h2>
+
+    <p>Vous allez faire un travail de recherche en autonomie pour apprendre à utiliser les Web API ci-dessous.
+        Pour chaque API, vous lirez la documentation associée sur le site MDN afin de comprendre à quoi sert cette
+        API. Ensuite, vous développerez une page HTML qui utilise cette API en suivant les contraintes demandées.</p>
+
+    <h3>API Web Storage</h3>
+    <p>Cette API permet de stocker des paires "clé=valeur" du côté client pour sauvegarder des préférences
+        utilisateur par exemple. Cette API remplace avantageusement le système des cookies.
+        Application composée d'un compteur et d'un bouton qui fait augmenter ce compteur. La valeur du compteur doit
+        être stockée avec l'API Web Storage afin de la conserver même si on change de page dans le même onglet et qu'on
+        revient dessus plus tard. Quand on arrive sur la page, le compteur est donc initialisé à sa valeur
+        précédente.</p>
+    <p class="correction">
+        <a href="/session-storage">Correction</a>
+    </p>
+
+    <h3>API Drag & Drop</h3>
+    <p>Cette API permet de gérer le déplacement d'objets au sein de votre page par glisser-déposer.
+        Réalisez deux : le premier est la zone de "drag" et le second sera la zone de "drop". Le premier devra
+        contenir 3 &lt;div&gt; qu'on peut déplacer dans la zone de drop avec la souris. Utilisez les fonctions que nous
+        avons déjà vues pour ajouter ou supprimer des éléments HTML avec le DOM.</p>
+
+    <p class="correction">
+        <a href="/drag-and-drop">Correction (version javascript)</a> |
+        <a href="/drag-and-drop-th">Correction (version thymeleaf)</a>
+    </p>
+
+    <h3>API Geolocation</h3>
+    <p>
+        Permet de connaître la position de l'utilisateur qui visite une page. Votre page devra intégrer un bouton
+        "Afficher ma position" qui déclenchera l'ajout d'une marque sur une carte OpenStreetMap intégrée dans votre
+        page. Utilisez le framework Leaflet dont la documentation de référence se trouve ici :
+        <a href="https://leafletjs.com/reference.html">https://leafletjs.com/reference.html</a>
+    </p>
+    <p>
+        Vous trouverez ci-après quelques indications pour intégrer une map
+        avec Leaflet. Aidez-vous d'Internet si besoin.
+    </p>
+    <p class="correction">
+        <a href="/geolocation">Correction</a>
+    </p>
+
+    <h3>API Web Share</h3>
+    <p>
+        Votre page affichera une liste d'annonces immobilières sous forme de cards contenant un bouton "Partager"
+        permettant d'activer l'API "Web Share". Ecrivez les annonces au format JSON : un titre, un texte,
+        une URL et une photo prise au hasard sur le site "lorem picsum". Générez ensuite chaque card à partir des
+        données JSON que vous allez parser avec la fonction <code>JSON.parse()</code>.
+    </p>
+    <p>
+        Exemple d'annonce :
+    <pre>
+            {
+                image: "https://picsum.photos/id/188/150.webp",
+                title: "Appartement de standing à Paris",
+                description: "Magnifique appartement de standing de 80m² dans le centre de Paris.",
+                url: "https://www.example.com/1"
+            }
+        </pre>
+    </p>
+    <p class="correction">
+        <a href="/web-share">Correction</a>
+    </p>
+</div>
 </body>
 </html>

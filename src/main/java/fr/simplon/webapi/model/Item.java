@@ -1,4 +1,4 @@
-package fr.simplon.springofsimplon.model;
+package fr.simplon.webapi.model;
 
 import java.sql.Date;
 

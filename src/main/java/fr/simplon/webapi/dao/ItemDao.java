@@ -1,7 +1,6 @@
-package fr.simplon.springofsimplon.dao;
+package fr.simplon.webapi.dao;
 
-import fr.simplon.springofsimplon.model.Item;
-import org.springframework.stereotype.Component;
+import fr.simplon.webapi.model.Item;
 
 import java.util.List;
 

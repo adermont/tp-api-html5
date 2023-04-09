@@ -1,6 +1,6 @@
-package fr.simplon.springofsimplon.dao;
+package fr.simplon.webapi.dao;
 
-import fr.simplon.springofsimplon.model.Item;
+import fr.simplon.webapi.model.Item;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;

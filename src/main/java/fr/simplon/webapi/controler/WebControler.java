@@ -1,6 +1,6 @@
-package fr.simplon.springofsimplon.controler;
+package fr.simplon.webapi.controler;
 
-import fr.simplon.springofsimplon.dao.ItemDao;
+import fr.simplon.webapi.dao.ItemDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
